@@ -1,8 +1,8 @@
 #include "filemanager_imp.h"
-
+using namespace std;
 
 filemanager_imp::filemanager_imp(int clientId){
-    this->fm = new FileManager("./dirprueba/");
+    this->fm = new FileManager("../dirprueba/");
     this->clientId = clientId;
 }
 
@@ -51,7 +51,13 @@ void filemanager_imp::recvOP(){
         break;
         case OP_LIST:{
             vector<string*>* vectorSt = this->fm->listFiles();
-            sendMSG(clientId, vectorSt, sizeof(vectorSt));
+            int size = (int)vectorSt->size();
+            sendMSG(clientId, (void*)&size, sizeof(int));            
+            for(unsigned int i=0; i<size; ++i){
+                char* file = (char*) vectorSt->at(i)->c_str();
+                sendMSG(clientId, (void*)file, strlen(file));
+                                    
+            }
         }
         break;
         default:
@@ -64,3 +70,50 @@ filemanager_imp::~filemanager_imp(){
     cout<<"Oju no para de destrui";
     delete this->fm;
 }
+
+
+/*
+#define SEGMENT 5000 //approximate target size of small file
+
+long file_size(char *name);//function definition below
+
+int main(void){
+    int segments=0, i, len, accum;
+    FILE *fp1, *fp2;
+    long sizeFile = filesize(largeFileName);
+    segments = sizeFile/SEGMENT + 1;//ensure end of file
+    char filename[260]={"c:\play\smallFileName"};//base name for small files.
+    char largeFileName[]={"c:\play\largeFileName.txt"};//change to your path
+    char smallFileName[260];
+    char line[1080];
+
+    fp1 = fopen(largeFileName, "r");
+    if(fp1){
+        for(i=0;i<segments;i++){
+            accum = 0;
+            sprintf(smallFileName, "%s%d.txt", filename, i);
+            fp2 = fopen(smallFileName, "w");
+            if(fp2){
+                while(fgets(line, 1080, fp1) && accum <= SEGMENT){
+                    accum += strlen(line);//track size of growing file
+                    fputs(line, fp2);
+                }
+                fclose(fp2);
+            }
+        }
+        fclose(fp1);
+    }
+    return 0;
+}
+
+long file_size(char *name){
+    FILE *fp = fopen(name, "rb"); //must be binary read to get bytes
+    long size=-1;
+    if(fp){
+        fseek (fp, 0, SEEK_END);
+        size = ftell(fp)+1;
+        fclose(fp);
+    }
+    return size;
+}
+*/
