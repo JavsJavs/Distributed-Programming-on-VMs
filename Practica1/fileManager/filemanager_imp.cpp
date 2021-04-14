@@ -16,19 +16,24 @@ void filemanager_imp::recvOP(){
     char* fileName = 0x00;
     char* data = 0x00;
     switch (op) {
-        case OP_READ:{           
+        case OP_READ:{
+            cout<<"Dos: "<<endl;           
             recvMSG(clientId, (void**)&buffer, &buffLen);
             fileName = (char*)buffer;
             delete[] buffer;
+            cout<<"Tres: "<<endl;
             recvMSG(clientId, (void**)&buffer, &buffLen);
             data = (char*)buffer;
             delete[] buffer;
+            cout<<"Cuatro: "<<endl;
             recvMSG(clientId, (void**)&buffer, &buffLen);
             dataLength = (unsigned long int)buffer;
             delete[] buffer;
+            cout<<"Cinco: "<<endl;
             this->fm->readFile(fileName, data, dataLength);
             sendMSG(clientId, (void*)*data, dataLength);    
-            delete[] data;  }      
+            delete[] data;  }  
+            cout<<"Seis: "<<endl;    
         break;
         case OP_WRITE:{
             recvMSG(clientId, (void**)buffer, &buffLen);
@@ -55,8 +60,7 @@ void filemanager_imp::recvOP(){
             sendMSG(clientId, (void*)&size, sizeof(int));            
             for(unsigned int i=0; i<size; ++i){
                 char* file = (char*) vectorSt->at(i)->c_str();
-                sendMSG(clientId, (void*)file, strlen(file));
-                                    
+                sendMSG(clientId, (void*)file, strlen(file));                                    
             }
         }
         break;

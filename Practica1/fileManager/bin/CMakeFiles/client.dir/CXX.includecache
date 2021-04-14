@@ -14,6 +14,12 @@ filemanager_stub.h
 utils.h
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.h
 
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/main_fm.cpp
+iostream
+-
+filemanager_stub.h
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager_stub.h
+
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.h
 sys/types.h
 -
