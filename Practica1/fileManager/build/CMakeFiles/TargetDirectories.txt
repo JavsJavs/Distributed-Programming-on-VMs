@@ -1,0 +1,4 @@
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/build/CMakeFiles/rebuild_cache.dir
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/build/CMakeFiles/edit_cache.dir
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/build/CMakeFiles/client.dir
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/build/CMakeFiles/server.dir

@@ -20,7 +20,6 @@ void clientManager(int clientID)
 int main(int argc, char** argv)
 {
  int server_fd=initServer(65069);
- int lastClientID=-1;
  while(1){
      while(!checkClient()){
          usleep(1000);

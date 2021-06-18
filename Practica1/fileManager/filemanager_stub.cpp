@@ -1,55 +1,85 @@
 #include "filemanager_stub.h"
+#include "filemanager.h"
 
-filemanager_stub::filemanager_stub(string path)
+filemanager_stub::filemanager_stub(const char * path)
 {
      this->conn=initClient("10.0.2.5", 65069);
-     this->dirPath = path;
+     sendMSG(0, path, strlen(path));
 }
 
 vector<string*>* filemanager_stub::listFiles(){
+     vector<string*>* flist = new vector<string*>();
      int op = OP_LIST;
      char* buffer = 0x00;
-     int buffLen = 0;
-     vector<string*>* result = new vector<string*>();
+     int bufferSize = 0;
+     int n_files;
+
      sendMSG(0, (void*)&op, sizeof(int));
-     recvMSG(0, (void**)&buffer, &buffLen);
-     int vecLen = ((int*)buffer)[0];
-     for(unsigned int i=0; i<vecLen; ++i){
-          recvMSG(0, (void**)&buffer, &buffLen);
-          string* file = new string((char*)buffer);
-          result->push_back(file);
+
+     recvMSG(0,(void**)&buffer, &bufferSize);
+     n_files=((int*)buffer)[0];
+
+     for (int i=1; i<=n_files; i++){
+          recvMSG(0, (void**)&buffer, &bufferSize);
+          flist->push_back(new string(buffer));
      }
-     delete[] buffer;
-     return result;
+
+     return flist;
 }
 
 void filemanager_stub::readFile(char* fileName, char* &data, unsigned long int & dataLength){
      int op = OP_READ;
-     int longitud = (int)dataLength;
-     cout<<"Uno: "<<endl;
      sendMSG(0, (void*)&op, sizeof(int));
-     cout<<"Dos: "<<endl;
-     sendMSG(0, (void*)&fileName, strlen(fileName));
-     cout<<"Tres: "<<endl;
-     sendMSG(0, (void*)&data, strlen(data));
-     cout<<"Cuatro: "<<endl;
-     sendMSG(0, (void*)&dataLength, sizeof(unsigned long int));
-     cout<<"Cinco: "<<endl;
-     recvMSG(0, (void**)&data, &longitud);
-     cout<<"Seis: "<<endl;
-     int finalData = ((char*)data)[0];
+     sendMSG(0, fileName, strlen(fileName));
+     receiveChunk(0, data, &dataLength);
 }
 
 void filemanager_stub::writeFile(char* fileName, char* data, unsigned long int dataLength){
      int op = OP_WRITE;
      sendMSG(0, (void*)&op, sizeof(int));
-     sendMSG(0, (void*)&fileName, strlen(fileName));
-     sendMSG(0, (void*)&data, strlen(data));
-     sendMSG(0, (void*)&dataLength, sizeof(unsigned long int));
+     sendMSG(0, fileName, strlen(fileName) + 1);
+     sendChunk(0, data, dataLength);
 }
 
 void filemanager_stub::freeListedFiles(vector<string*>* fileList){
-     int op = OP_FREE;
-     sendMSG(0, (void*)&op, sizeof(int));
-     sendMSG(0, (void*)&fileList, sizeof(fileList));
+     FileManager("./").freeListedFiles(fileList);
 }
+
+filemanager_stub::~filemanager_stub()
+{
+    int op = OP_EXIT;
+    sendMSG(0,(void*)&op,sizeof(int));
+    closeConnection(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
