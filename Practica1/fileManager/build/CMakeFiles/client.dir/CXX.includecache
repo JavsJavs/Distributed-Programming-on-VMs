@@ -38,6 +38,12 @@ vector
 dirent.h
 -
 
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager_stub.cpp
+filemanager_stub.h
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager_stub.h
+filemanager.h
+/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager.h
+
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager_stub.h
 utils.h
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.h

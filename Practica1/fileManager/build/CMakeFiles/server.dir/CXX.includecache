@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/file_func.cpp
-file_func.h
-/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/file_func.h
-
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/file_func.h
 string
 -
@@ -19,10 +15,6 @@ iostream
 -
 utils.h
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.h
-
-/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager.cpp
-filemanager.h
-/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager.h
 
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/filemanager.h
 iostream
@@ -64,16 +56,6 @@ filemanager_imp.h
 thread
 -
 list
--
-
-/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.cpp
-utils.h
-/home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.h
-map
--
-thread
--
-mutex
 -
 
 /home/qwe/compartido/sistemasDistribuidos/Practica1/fileManager/utils.h
