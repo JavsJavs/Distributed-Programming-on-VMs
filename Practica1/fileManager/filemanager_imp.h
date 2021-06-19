@@ -12,9 +12,12 @@
 #define OP_EXIT 4
 
 class filemanager_imp{
+
     int clientID;
-    FileManager* fm;
+    FileManager* fileManager;
+
     public:
+
         bool salir = false;
         filemanager_imp(int clientID);
         void recvOP();

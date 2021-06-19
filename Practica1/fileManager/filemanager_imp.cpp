@@ -1,74 +1,95 @@
 #include "filemanager_imp.h"
 using namespace std;
 
-filemanager_imp::filemanager_imp(int clientID)
-{
+filemanager_imp::filemanager_imp(int clientID){
+
     char *buff;
     int pathLen;
     this->clientID=clientID;
+
     recvMSG(clientID, (void**)&buff, &pathLen);
     string path = string(buff, pathLen);
-    fm = new FileManager(path);
+
+    fileManager = new FileManager(path);
+
 }
 
 void filemanager_imp::recvOP(){
+
     int op = -1, buffLen;
     char* buffer = 0x00;
+
     recvMSG(clientID, (void**)&buffer, &buffLen);
     op = ((int*)buffer)[0];
     delete[] buffer;
+
     unsigned long int dataLength = 0;
     char* fileName = 0x00;
     char* data = 0x00;
+
     switch (op) {
+
         case OP_READ:{
-            char *nombre, *data;
+
+            char *file_name, *data;
             int len;
             unsigned long int datalen;
-            recvMSG(clientID, (void**)&nombre, &len);
-            fm->readFile(nombre, data, datalen);
+
+            recvMSG(clientID, (void**)&file_name, &len);
+            fileManager->readFile(file_name, data, datalen);
             sendChunk(clientID, data, datalen);    
-        break;
+            break;
+
         }
         case OP_WRITE:{
-            char *nombre, *data = nullptr;
-            unsigned long int datalen;
-            int len;
 
-            recvMSG(clientID, (void**)&nombre, &len);
+            char *file_name, *data = nullptr;
+            int len;
+            unsigned long int datalen;
+
+            recvMSG(clientID, (void**)&file_name, &len);
             receiveChunk(clientID, data, &datalen);
 
-            fm->writeFile(nombre, data, datalen);
+            fileManager->writeFile(file_name, data, datalen);
 
-            delete [] nombre;
+            delete [] file_name;
             delete [] data;
             break;
         }
         case OP_EXIT:{
+
             salir = true;       
             break;
+
         }
         case OP_LIST:{
-            vector<string*>* flist = fm->listFiles();
-            int size = flist->size();
+
+            vector<string*>* file_list = fileManager->listFiles();
+            int size = file_list->size();
 
             sendMSG(clientID, (void*) &size, sizeof(int));
 
-            for(int i = 0; i < flist->size(); i++){
-                sendMSG(clientID, (void *) flist->at(i)->c_str(), flist->at(i)->length() + 1);
+            for( int i = 0; i < file_list->size(); i++ ){
+
+                sendMSG(clientID, (void *) file_list->at(i)->c_str(), file_list->at(i)->length() + 1);
+
             }
 
-            fm->freeListedFiles(flist);
-        break;
+            fileManager->freeListedFiles(file_list);
+            break;
+
         }
         default:
-            cout<<"Entramos al default :O";
+
+            cout<<"Default";
+
         break;
     }
 }
 
-filemanager_imp::~filemanager_imp()
-{
-    delete fm; 
+filemanager_imp::~filemanager_imp(){
+
+    delete fileManager; 
     closeConnection(clientID);
+
 }

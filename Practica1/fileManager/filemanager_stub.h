@@ -14,14 +14,18 @@ using namespace std;
 
 
 class filemanager_stub{
+
         connection_t conn;
+
         public:
+
             filemanager_stub(const char * path);
             vector<string*>* listFiles();
-            void readFile(char* fileName, char* &data, unsigned long int & dataLength);
-            void writeFile(char* fileName, char* data, unsigned long int dataLength);
-            void freeListedFiles(vector<string*>* fileList);
+            void readFile(char* file_name, char* &data, unsigned long int & dataLength);
+            void writeFile(char* file_name, char* data, unsigned long int dataLength);
+            void freeListedFiles(vector<string*>* file_list);
             ~filemanager_stub();
+            
 };
 
 #endif
