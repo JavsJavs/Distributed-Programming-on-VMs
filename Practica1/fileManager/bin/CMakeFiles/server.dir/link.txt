@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/server.dir/server.cpp.o CMakeFiles/server.dir/filemanager.cpp.o CMakeFiles/server.dir/filemanager_imp.cpp.o CMakeFiles/server.dir/utils.cpp.o  -o server  -lpthread 

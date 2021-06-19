@@ -1,9 +1,9 @@
-#include "utils.h"
 #include <iostream>
-#include <string>
-#include "multMatrix_imp.h"
 #include <thread>
 #include <list>
+#include <string>
+#include "utils.h"
+#include "multMatrix_imp.h"
 
 
 std::list<std::thread*> threadList;
