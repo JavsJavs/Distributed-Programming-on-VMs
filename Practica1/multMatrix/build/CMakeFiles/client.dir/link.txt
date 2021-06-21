@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread -O3 -DNDEBUG  -static -rdynamic CMakeFiles/client.dir/main_multMatrix.cpp.o CMakeFiles/client.dir/multmatrix.cpp.o CMakeFiles/client.dir/utils.cpp.o CMakeFiles/client.dir/multMatrix_stub.cpp.o CMakeFiles/client.dir/matrix_func.cpp.o  -o client 

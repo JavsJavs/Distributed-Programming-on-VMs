@@ -19,6 +19,7 @@ int main()
     matrix_t* m3=mmatrix->readMatrix("resultado.txt");
     matrix_t* mres2=mmatrix->multMatrices(m1,m3);
     mmatrix->writeMatrix(mres2,"resultado2.txt");
+    mmatrix->writeMatrix(mmatrix->readMatrix("matrizOrigen.txt"), "matrizDestino.txt");
 
     freeMatrix(m1);
     freeMatrix(m2);

@@ -1,0 +1,4 @@
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/build/CMakeFiles/rebuild_cache.dir
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/build/CMakeFiles/edit_cache.dir
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/build/CMakeFiles/server.dir
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/build/CMakeFiles/client.dir

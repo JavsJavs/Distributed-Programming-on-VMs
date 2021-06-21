@@ -19,7 +19,7 @@
 class multMatrix_stub{
     connection_t conn;
     matrix_t *createMatrixOP(int op, int rows, int cols);
-    multMatrix* mm;
+    multMatrix* mMatrix;
 
 public:
     multMatrix_stub(const char *ip = nullptr);

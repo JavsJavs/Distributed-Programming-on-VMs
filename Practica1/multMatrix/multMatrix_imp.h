@@ -16,13 +16,13 @@
 
 class multMatrix_imp{
     int clientID;
-    multMatrix *multMatrix;
+    multMatrix* mMatrix;
 
     public:
         bool salir = false;
-        multMatrix_imp();
+        multMatrix_imp(int clientID);
         void recvOP();
         ~multMatrix_imp();
-}
+};
 
 #endif

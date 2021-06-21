@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/main_multMatrix.cpp
+stdio.h
+-
+stdlib.h
+-
+iostream
+-
+multmatrix.h
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/multmatrix.h
+
+/home/qwe/compartido/sistemasDistribuidos/Practica1/multMatrix/multmatrix.h
+

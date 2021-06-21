@@ -1,21 +1,19 @@
+#include "utils.h"
+#include "multMatrix_imp.h"
 #include <iostream>
 #include <thread>
 #include <list>
 #include <string>
-#include "utils.h"
-#include "multMatrix_imp.h"
-
 
 std::list<std::thread*> threadList;
 void clientManager(int clientID)
 {
-    multMatrix_imp* op=new multMatrix_imp(clientID);
+    multMatrix_imp* op = new multMatrix_imp(clientID);
 
      while(!op->salir){
        op->recvOP();
      }
      delete op;
-
 }
 
 int main(int argc, char** argv)
@@ -25,14 +23,11 @@ int main(int argc, char** argv)
  while(1){
      while(!checkClient()){
          usleep(1000);
-
-
      }
      int clientID=getLastClientID();
 
      threadList.push_back(new std::thread(clientManager,clientID));
  }
-
   closeConnection(server_fd);
  return 0;
 }
