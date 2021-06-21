@@ -21,11 +21,11 @@ void multMatrix_imp::recvOP(){
             char *nombre, *data;
             int len;
             unsigned long int datalen;
-            matrix_t *result;
+            matrix_t *final_matrix;
 
             recvMSG(clientID, (void**)&nombre, &len);
-            result = receiveMatrix(clientID);
-            mMatrix->writeMatrix(result, nombre);
+            final_matrix = receiveMatrix(clientID);
+            mMatrix->writeMatrix(final_matrix, nombre);
         break;
 
         }
@@ -34,28 +34,28 @@ void multMatrix_imp::recvOP(){
             char *nombre, *data;
             int len;
             unsigned long int datalen;
-            matrix_t *result;
+            matrix_t *final_matrix;
 
             recvMSG(clientID, (void**)&nombre, &len);
-            result = mMatrix->readMatrix(nombre);
-            sendMatrix(clientID, result);
+            final_matrix = mMatrix->readMatrix(nombre);
+            sendMatrix(clientID, final_matrix);
 
         break;
         }
         case OP_MULT:{
 
-            matrix_t *matrix1, *matrix2, *result;
+            matrix_t *matrix1, *matrix2, *final_matrix;
 
             matrix1 = receiveMatrix(clientID);
             matrix2 = receiveMatrix(clientID);
-            result = mMatrix->multMatrices(matrix1, matrix2);
-            sendMatrix(clientID, result);
+            final_matrix = mMatrix->multMatrices(matrix1, matrix2);
+            sendMatrix(clientID, final_matrix);
         break;
 
         }
         case OP_IDENTITY:{
 
-            matrix_t *result;
+            matrix_t *final_matrix;
             int rows, cols, bufLen;
             char* buffer;
 
@@ -63,14 +63,14 @@ void multMatrix_imp::recvOP(){
             rows = ((int*)buffer)[0];
             recvMSG(clientID, (void**)&buffer, &bufLen);
             cols = ((int*)buffer)[0];
-            result = mMatrix->createIdentity(rows, cols);
-            sendMatrix(clientID, result);
+            final_matrix = mMatrix->createIdentity(rows, cols);
+            sendMatrix(clientID, final_matrix);
             break;
 
         }
         case OP_RANDOM:{
 
-            matrix_t *result;
+            matrix_t *final_matrix;
             int rows, cols;
             char* buffer;
             int bufLen;
@@ -79,8 +79,8 @@ void multMatrix_imp::recvOP(){
             rows = ((int*)buffer)[0];
             recvMSG(clientID, (void**)&buffer, &bufLen);
             cols = ((int*)buffer)[0];
-            result = mMatrix->createRandMatrix(rows, cols);
-            sendMatrix(clientID, result); 
+            final_matrix = mMatrix->createRandMatrix(rows, cols);
+            sendMatrix(clientID, final_matrix); 
             break;
 
         }
@@ -88,7 +88,7 @@ void multMatrix_imp::recvOP(){
 
             salir = true;
             break;
-            
+
         }
         default:{      
             std::cout<<"ERROR SWITCH DEFAULT"<<std::endl;

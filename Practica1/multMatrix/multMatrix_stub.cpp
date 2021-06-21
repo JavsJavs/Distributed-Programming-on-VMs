@@ -49,28 +49,33 @@ matrix_t *multMatrix_stub::multMatrices(matrix_t* matrix1, matrix_t *matrix2){
 
 matrix_t *multMatrix_stub::createRandMatrix(int n_rows, int n_cols){
 
-    return createMatrixOP(OP_RANDOM, n_rows, n_cols);
+    int op = OP_RANDOM;
+    matrix_t *matrix;
+
+    sendMSG(0, (void*)&op, sizeof(int));
+    sendMSG(0, (void*)&rows, sizeof(int));
+    sendMSG(0, (void*)&cols, sizeof(int));
+
+    matrix = receiveMatrix(0);
+    return matrix;
 
 }
 
 matrix_t *multMatrix_stub::createIdentity(int n_rows, int n_cols){
 
-    return createMatrixOP(OP_IDENTITY, n_rows, n_cols);
-
-}
-
-
-matrix_t *multMatrix_stub::createMatrixOP(int op, int n_rows, int n_cols){
-
-    matrix_t *result;
+    int op = OP_IDENTITY;
+    matrix_t *matrix;
 
     sendMSG(0, (void*)&op, sizeof(int));
-    sendMSG(0, (void*)&n_rows, sizeof(int));
-    sendMSG(0, (void*)&n_cols, sizeof(int));
+    sendMSG(0, (void*)&rows, sizeof(int));
+    sendMSG(0, (void*)&cols, sizeof(int));
 
-    result = receiveMatrix(0);
-    return result;
+    matrix = receiveMatrix(0);
+    return matrix;
+
 }
+
+
 
 
 multMatrix_stub::~multMatrix_stub()
