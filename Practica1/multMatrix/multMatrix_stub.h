@@ -17,18 +17,21 @@
 
 
 class multMatrix_stub{
+
     connection_t conn;
-    matrix_t *createMatrixOP(int op, int rows, int cols);
+    matrix_t *createMatrixOP(int op, int n_rows, int n_cols);
     multMatrix* mMatrix;
 
 public:
+
     multMatrix_stub(const char *ip = nullptr);
-    matrix_t* readMatrix(const char* fileName);
+    void writeMatrix(matrix_t* m, const char *matrix_name);
+    matrix_t* readMatrix(const char* matrix_name);
     matrix_t *multMatrices(matrix_t* m1, matrix_t *m2);
-    void writeMatrix(matrix_t* m, const char *fileName);
+    matrix_t *createIdentity(int n_rows, int n_cols);
+    matrix_t *createRandMatrix(int n_rows, int n_cols);
     ~multMatrix_stub();
-    matrix_t *createIdentity(int rows, int cols);
-    matrix_t *createRandMatrix(int rows, int cols);
+
 };
 
 #endif

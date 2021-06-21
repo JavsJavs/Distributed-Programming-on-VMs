@@ -29,18 +29,6 @@ void filemanager_imp::recvOP(){
 
     switch (op) {
 
-        case OP_READ:{
-
-            char *file_name, *data;
-            int len;
-            unsigned long int datalen;
-
-            recvMSG(clientID, (void**)&file_name, &len);
-            fileManager->readFile(file_name, data, datalen);
-            sendChunk(clientID, data, datalen);    
-            break;
-
-        }
         case OP_WRITE:{
 
             char *file_name, *data = nullptr;
@@ -56,12 +44,20 @@ void filemanager_imp::recvOP(){
             delete [] data;
             break;
         }
-        case OP_EXIT:{
 
-            salir = true;       
+        case OP_READ:{
+
+            char *file_name, *data;
+            int len;
+            unsigned long int datalen;
+
+            recvMSG(clientID, (void**)&file_name, &len);
+            fileManager->readFile(file_name, data, datalen);
+            sendChunk(clientID, data, datalen);    
             break;
 
         }
+
         case OP_LIST:{
 
             vector<string*>* file_list = fileManager->listFiles();
@@ -76,6 +72,12 @@ void filemanager_imp::recvOP(){
             }
 
             fileManager->freeListedFiles(file_list);
+            break;
+
+        }
+                case OP_EXIT:{
+
+            salir = true;       
             break;
 
         }

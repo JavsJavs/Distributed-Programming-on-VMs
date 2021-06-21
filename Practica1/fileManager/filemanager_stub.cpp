@@ -7,6 +7,25 @@ filemanager_stub::filemanager_stub(const char * path){
      sendMSG(0, path, strlen(path));
 }
 
+void filemanager_stub::writeFile(char* file_name, char* data, unsigned long int dataLength){
+     int op = OP_WRITE;
+
+     sendMSG(0, (void*)&op, sizeof(int));
+     sendMSG(0, file_name, strlen(file_name) + 1);
+     sendChunk(0, data, dataLength);
+
+}
+
+void filemanager_stub::readFile(char* file_name, char* &data, unsigned long int & dataLength){
+
+     int op = OP_READ;
+
+     sendMSG(0, (void*)&op, sizeof(int));
+     sendMSG(0, file_name, strlen(file_name));
+     receiveChunk(0, data, &dataLength);
+}
+
+
 vector<string*>* filemanager_stub::listFiles(){
 
      int op = OP_LIST;
@@ -32,25 +51,8 @@ vector<string*>* filemanager_stub::listFiles(){
 
 
 
-void filemanager_stub::readFile(char* file_name, char* &data, unsigned long int & dataLength){
-
-     int op = OP_READ;
-
-     sendMSG(0, (void*)&op, sizeof(int));
-     sendMSG(0, file_name, strlen(file_name));
-     receiveChunk(0, data, &dataLength);
-}
 
 
-
-void filemanager_stub::writeFile(char* file_name, char* data, unsigned long int dataLength){
-     int op = OP_WRITE;
-
-     sendMSG(0, (void*)&op, sizeof(int));
-     sendMSG(0, file_name, strlen(file_name) + 1);
-     sendChunk(0, data, dataLength);
-
-}
 
 
 

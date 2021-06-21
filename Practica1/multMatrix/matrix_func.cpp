@@ -1,32 +1,39 @@
 #include "matrix_func.h"
 
 void sendMatrix(int clientID, matrix_t* matrix){
-    int rows, cols;
+    int n_rows, n_cols;
     int* data;
-    rows = matrix->rows;
-    cols = matrix->cols;
+    n_rows = matrix->rows;
+    n_cols = matrix->ols;
     data = matrix->data;
-    sendMSG(clientID, (void*)&rows, sizeof(int));
-    sendMSG(clientID, (void*)&cols, sizeof(int));
-    sendMSG(clientID, (void*)&data, rows * cols);
+    sendMSG(clientID, (void*)&n_rows, sizeof(int));
+    sendMSG(clientID, (void*)&n_cols, sizeof(int));
+    sendMSG(clientID, (void*)&data, n_rows * n_cols);
 }
 
 matrix_t* receiveMatrix(int clientID){
-    int rows, cols, bufLen;
+
+    int n_rows, n_cols, bufLen;
     int* data;
     char* buffer;
+    matrix_t* matrix;
+
     recvMSG(clientID, (void**)&buffer, &bufLen);
-    rows = ((int*)buffer)[0];
+    n_rows = ((int*)buffer)[0];
     delete[] buffer;
+
     recvMSG(clientID, (void**)&buffer, &bufLen);
-    cols = ((int*)buffer)[0];
+    n_cols = ((int*)buffer)[0];
     delete[] buffer;
+
     recvMSG(clientID, (void**)&buffer, &bufLen);
     data = ((int**)buffer)[0];
     delete[] buffer;
-    matrix_t* matrix;
-    matrix->rows = rows;
-    matrix->cols = cols;
+    
+    matrix->rows = n_rows;
+    matrix->cols = n_cols;
     matrix->data = data;
+    
     return matrix;
+
 }
