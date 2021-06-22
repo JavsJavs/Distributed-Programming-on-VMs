@@ -37,6 +37,7 @@ matrix_t* multMatrix_stub::readMatrix(const char* matrix_name){
 }
 
 matrix_t *multMatrix_stub::multMatrices(matrix_t* matrix1, matrix_t *matrix2){
+
     int op = OP_MULT;
     sendMSG(0, (void*)&op, sizeof(int));
 
@@ -53,8 +54,8 @@ matrix_t *multMatrix_stub::createRandMatrix(int n_rows, int n_cols){
     matrix_t *matrix;
 
     sendMSG(0, (void*)&op, sizeof(int));
-    sendMSG(0, (void*)&rows, sizeof(int));
-    sendMSG(0, (void*)&cols, sizeof(int));
+    sendMSG(0, (void*)&n_rows, sizeof(int));
+    sendMSG(0, (void*)&n_cols, sizeof(int));
 
     matrix = receiveMatrix(0);
     return matrix;
@@ -67,8 +68,8 @@ matrix_t *multMatrix_stub::createIdentity(int n_rows, int n_cols){
     matrix_t *matrix;
 
     sendMSG(0, (void*)&op, sizeof(int));
-    sendMSG(0, (void*)&rows, sizeof(int));
-    sendMSG(0, (void*)&cols, sizeof(int));
+    sendMSG(0, (void*)&n_rows, sizeof(int));
+    sendMSG(0, (void*)&n_cols, sizeof(int));
 
     matrix = receiveMatrix(0);
     return matrix;
@@ -78,10 +79,11 @@ matrix_t *multMatrix_stub::createIdentity(int n_rows, int n_cols){
 
 
 
-multMatrix_stub::~multMatrix_stub()
-{
+multMatrix_stub::~multMatrix_stub(){
+
     int op = OP_EXIT;
     sendMSG(0,(void*)&op,sizeof(int));
 
     closeConnection(0);
+    
 }

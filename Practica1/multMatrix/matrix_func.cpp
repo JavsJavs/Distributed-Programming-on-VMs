@@ -4,7 +4,7 @@ void sendMatrix(int clientID, matrix_t* matrix){
     int n_rows, n_cols;
     int* data;
     n_rows = matrix->rows;
-    n_cols = matrix->ols;
+    n_cols = matrix->cols;
     data = matrix->data;
     sendMSG(clientID, (void*)&n_rows, sizeof(int));
     sendMSG(clientID, (void*)&n_cols, sizeof(int));
