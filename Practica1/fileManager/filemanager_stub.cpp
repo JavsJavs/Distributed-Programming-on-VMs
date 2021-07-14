@@ -50,16 +50,9 @@ vector<string*>* filemanager_stub::listFiles(){
 }
 
 
-
-
-
-
-
-
 void filemanager_stub::freeListedFiles(vector<string*>* file_list){
      FileManager("./").freeListedFiles(file_list);
 }
-
 
 
 filemanager_stub::~filemanager_stub()
@@ -69,35 +62,3 @@ filemanager_stub::~filemanager_stub()
     sendMSG(0,(void*)&op,sizeof(int));
     closeConnection(0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

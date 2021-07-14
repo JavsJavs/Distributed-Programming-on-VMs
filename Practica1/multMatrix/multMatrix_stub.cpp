@@ -76,9 +76,6 @@ matrix_t *multMatrix_stub::createIdentity(int n_rows, int n_cols){
 
 }
 
-
-
-
 multMatrix_stub::~multMatrix_stub(){
 
     int op = OP_EXIT;
