@@ -9,7 +9,7 @@ multMatrix_stub::multMatrix_stub(const char *ip){
         ip = "127.0.0.1";
     }
 
-    conn = initClient((char*)ip,65321);
+    conn = initClient((char*)ip,65065);
 
 }
 
